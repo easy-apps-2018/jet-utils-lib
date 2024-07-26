@@ -60,7 +60,7 @@ afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("maven") {
-                groupId = "com.easyapps.jetutils"
+                groupId = "com.easyapps.jetutilslib"
                 artifactId = "jet-utils"
                 from(components["release"])
             }
