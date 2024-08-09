@@ -12,12 +12,12 @@ fun ComponentActivity.onScreenLock(isLock: Boolean) {
         ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 }
 
-fun ComponentActivity.enableSplashScreen(delay: Long = 800) {
+fun ComponentActivity.initSplashScreen(delay: Long = 800) {
     var isSplash = true
     onHandler(delay) { isSplash = false }
     this.installSplashScreen().setKeepOnScreenCondition { isSplash }
 }
 
-fun ComponentActivity.enableDecorFitsSystemWindows(fits: Boolean) {
-    WindowCompat.setDecorFitsSystemWindows(this.window, fits)
+fun ComponentActivity.enableDecorFitsSystemWindows(decorFitsSystemWindows: Boolean) {
+    WindowCompat.setDecorFitsSystemWindows(this.window, decorFitsSystemWindows)
 }
