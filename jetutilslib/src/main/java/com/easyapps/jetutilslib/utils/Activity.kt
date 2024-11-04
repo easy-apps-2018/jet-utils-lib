@@ -2,6 +2,7 @@ package com.easyapps.jetutilslib.utils
 
 import android.content.pm.*
 import androidx.activity.*
+import androidx.compose.runtime.*
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.*
 
@@ -20,4 +21,9 @@ fun ComponentActivity.initSplashScreen(delay: Long = 800) {
 
 fun ComponentActivity.enableDecorFitsSystemWindows(decorFitsSystemWindows: Boolean) {
     WindowCompat.setDecorFitsSystemWindows(this.window, decorFitsSystemWindows)
+}
+
+@Composable
+fun ComponentActivity.MainScreen() {
+
 }

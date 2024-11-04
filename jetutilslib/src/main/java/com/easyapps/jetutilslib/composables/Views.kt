@@ -55,7 +55,7 @@ fun Icon(
                         )
                     },
                     state = rememberTooltipState(),
-                    positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider()
+                    positionProvider = TooltipDefaults.rememberTooltipPositionProvider()
                 )
             else
                 Icon(

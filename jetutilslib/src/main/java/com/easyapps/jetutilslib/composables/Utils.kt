@@ -32,7 +32,7 @@ fun NavGraph(
 
 @Composable
 fun rememberNavController(onChanged: (value: String) -> Unit): NavHostController {
-    val controller = androidx.navigation.compose.rememberNavController()
+    val controller = rememberNavController()
     controller.addOnDestinationChangedListener { _, destination, _ ->
         onChanged.invoke(destination.route.toString())
     }

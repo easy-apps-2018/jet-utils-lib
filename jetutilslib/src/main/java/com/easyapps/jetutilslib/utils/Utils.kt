@@ -10,9 +10,3 @@ val currentTime: Long
 fun onHandler(delay: Long, onPostDelayed: () -> Unit) {
     Handler(Looper.getMainLooper()).postDelayed({ onPostDelayed.invoke() }, delay)
 }
-
-fun ComponentActivity.enableSplashScreen(delay: Long = 800L) {
-    var isSplash = true
-    onHandler(delay = delay) { isSplash = false }
-    this.installSplashScreen().setKeepOnScreenCondition { isSplash }
-}
