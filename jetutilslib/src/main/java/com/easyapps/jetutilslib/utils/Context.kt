@@ -36,7 +36,7 @@ fun Context.onToast(text: String?) {
 
 fun Context.getVersionName(): String {
     return try {
-        this.packageManager.getPackageInfo(this.packageName, 0).versionName
+        this.packageManager.getPackageInfo(this.packageName, 0).versionName ?: EMPTY
     } catch (_: Exception) {
         EMPTY
     }
