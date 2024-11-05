@@ -57,7 +57,7 @@ private fun getCompactTypography(): Typography {
             lineBreak = LineBreak.Paragraph
         ),
         titleSmall = TextStyle(
-            fontSize = 14.sp,
+            fontSize = 16.sp,
             lineHeight = 20.sp,
             letterSpacing = 0.1.sp,
             fontWeight = FontWeight.Medium,
