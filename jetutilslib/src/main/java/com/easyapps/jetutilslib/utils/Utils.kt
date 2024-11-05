@@ -3,8 +3,6 @@ package com.easyapps.jetutilslib.utils
 import android.os.*
 import androidx.compose.runtime.saveable.*
 import androidx.compose.ui.graphics.*
-import androidx.core.app.*
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 val currentTime: Long
     get() = System.currentTimeMillis()
