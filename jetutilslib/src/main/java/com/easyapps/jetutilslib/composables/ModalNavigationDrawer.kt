@@ -13,31 +13,32 @@ import androidx.compose.ui.*
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.text.font.*
 import androidx.compose.ui.unit.*
-import com.easyapps.jetutilslib.utils.*
 import kotlinx.coroutines.*
 import kotlinx.parcelize.*
 
 @Composable
 fun ComponentActivity.MainScreen(
     modifier: Modifier,
+    drawerState: DrawerState,
     isFabVisible: Boolean = true,
     isRailVisible: Boolean = false,
     drawerContentWidth: Dp = 300.dp,
     isBottomBarVisible: Boolean = true,
-    drawerContentHeaderSize: Dp = 70.dp,
+    drawerContentHeaderSize: Dp = 74.dp,
     drawerGesturesEnabled: Boolean = true,
     enablePermanentDrawer: Boolean = false,
     snackbarHost: @Composable () -> Unit = {},
     content: @Composable (PaddingValues) -> Unit,
-    drawerState: DrawerState = rememberStateOfDrawer(),
-    drawerContent: @Composable() (ColumnScope.() -> Unit),
+    navRailContent: @Composable ColumnScope.() -> Unit,
+    drawerContent: @Composable (ColumnScope.() -> Unit),
     bottomBarContent: @Composable RowScope.() -> Unit = {},
-    navigationRailContent: @Composable ColumnScope.() -> Unit,
-    bannerContent: @Composable() (ColumnScope.() -> Unit) = {},
+    bannerContent: @Composable (ColumnScope.() -> Unit) = {},
+    navRailHeader: @Composable (ColumnScope.() -> Unit)? = null,
     containerColor: Color = MaterialTheme.colorScheme.background,
     floatingActionButtons: @Composable ColumnScope.() -> Unit = {},
+    navRailContainerColor: Color = MaterialTheme.colorScheme.surface,
     drawerContainerColor: Color = MaterialTheme.colorScheme.background,
-    navigationRailHeader: @Composable() (ColumnScope.() -> Unit)? = null
+    permanentNavDrawerContainerColor: Color = MaterialTheme.colorScheme.surface
 ) {
     Column(
         content = {
@@ -57,6 +58,7 @@ fun ComponentActivity.MainScreen(
                                         )
                                     }
                                 },
+                                containerColor = containerColor,
                                 modifier = Modifier.fillMaxSize(),
                             )
                         },
@@ -71,11 +73,11 @@ fun ComponentActivity.MainScreen(
                                     .width(width = drawerContentWidth)
                                     .onVerticalScroll()
                                     .systemBarsPadding()
-                                    .background(color = drawerContainerColor),
+                                    .background(color = permanentNavDrawerContainerColor),
                                 verticalArrangement = Arrangement.spacedBy(space = 4.dp)
                             )
                         },
-                        modifier = Modifier.background(color = drawerContainerColor)
+                        modifier = Modifier.background(color = permanentNavDrawerContainerColor)
                     )
                 },
                 visible = enablePermanentDrawer,
@@ -92,29 +94,33 @@ fun ComponentActivity.MainScreen(
                                         SlideOutVisible(
                                             content = {
                                                 NavigationRail(
+                                                    header = {
+                                                        Column {
+                                                            Spacer(modifier = Modifier.padding(top = 4.dp))
+                                                            navRailHeader?.invoke(this)
+                                                        }
+                                                    },
                                                     content = {
                                                         Column(
-                                                            content = navigationRailContent,
+                                                            content = navRailContent,
                                                             modifier = Modifier.onVerticalScroll(),
                                                             horizontalAlignment = Alignment.CenterHorizontally
                                                         )
                                                     },
-                                                    header = navigationRailHeader,
-                                                    containerColor = containerColor,
                                                     modifier = Modifier.fillMaxHeight(),
+                                                    containerColor = navRailContainerColor,
                                                 )
                                             },
-                                            modifier = Modifier.fillMaxHeight(),
-                                            visible = isCompact() && isRailVisible
+                                            visible = isRailVisible,
+                                            modifier = Modifier.fillMaxHeight()
                                         )
                                         content.invoke(paddingValues)
                                     },
                                     modifier = Modifier.fillMaxSize()
-                                        .background(color = containerColor)
                                 )
                             },
                             bottomBar = {
-                                SlideInVisible(visible = isCompact() && isBottomBarVisible) {
+                                SlideInVisible(visible = isBottomBarVisible) {
                                     NavigationBar(
                                         content = bottomBarContent,
                                         containerColor = containerColor,
@@ -132,6 +138,7 @@ fun ComponentActivity.MainScreen(
                                     )
                                 }
                             },
+                            containerColor = containerColor,
                             modifier = Modifier.fillMaxSize(),
                         )
                     },
@@ -219,6 +226,31 @@ fun DrawerItem(
                 selectedIconColor = selectedIconColor,
                 selectedContainerColor = selectedContainerColor,
                 unselectedContainerColor = unselectedContainerColor
+            )
+        )
+    }
+}
+
+@Composable
+fun RailItem(
+    navItem: NavItem,
+    selected: Boolean,
+    onClick: suspend CoroutineScope.() -> Unit,
+    selectedIconColor: Color = MaterialTheme.colorScheme.secondary
+) {
+    if (navItem.visible) {
+        val scope = rememberCoroutineScope()
+        NavigationRailItem(
+            icon = {
+                Icon(icon = navItem.icon, iconSize = 24.dp)
+            },
+            onClick = {
+                scope.launch { onClick.invoke(this) }
+            },
+            selected = selected,
+            colors = NavigationRailItemDefaults.colors(
+                selectedIconColor = selectedIconColor,
+                indicatorColor = selectedIconColor.copy(alpha = 0.1f)
             )
         )
     }

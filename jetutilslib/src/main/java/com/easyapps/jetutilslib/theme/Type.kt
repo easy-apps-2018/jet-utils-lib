@@ -81,7 +81,7 @@ private fun getMediumTypography(): Typography {
         ),
         labelSmall = TextStyle(
             fontFamily = ubuntuFontFamily,
-            fontSize = 12.sp,
+            fontSize = 11.sp,
             lineHeight = 14.sp,
             letterSpacing = 0.5.sp,
             fontWeight = FontWeight.Light,

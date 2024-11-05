@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Jet Utils App</string>
+    <string name="menu">Menu</string>
+    <string name="more">More</string>
+    <string name="home">Home</string>
+    <string name="all_notes">All notes</string>
+    <string name="archive">Archive</string>
+    <string name="trash">Trash</string>
 </resources>

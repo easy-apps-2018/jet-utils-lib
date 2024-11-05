@@ -3,28 +3,11 @@ package com.easyapps.jetutilslib.composables
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.*
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.res.*
+import androidx.compose.ui.text.font.*
 import androidx.compose.ui.text.style.*
-import androidx.compose.ui.unit.*
 
-@Composable
-fun NavigationBar(
-    visible: Boolean,
-    content: @Composable RowScope.() -> Unit,
-    background: Color = MaterialTheme.colorScheme.background,
-) {
-
-    SlideInVisible(visible = visible) {
-        NavigationBar(
-            content = content,
-            containerColor = background,
-            contentColor = MaterialTheme.colorScheme.secondary,
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
-}
 
 @Composable
 fun RowScope.BarItem(
@@ -42,10 +25,10 @@ fun RowScope.BarItem(
         label = {
             Text(
                 maxLines = 1,
-                fontSize = 14.sp,
+                //fontSize = 14.sp,
+                fontWeight = FontWeight.Light,
                 overflow = TextOverflow.Ellipsis,
-                text = stringResource(id = navItem.title),
-                style = MaterialTheme.typography.labelSmall
+                text = stringResource(id = navItem.title)
             )
         },
         onClick = onClick,
