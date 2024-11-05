@@ -2,8 +2,35 @@ package com.easyapps.jetutilslib.composables
 
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
 import androidx.navigation.*
+import androidx.navigation.compose.*
+import com.easyapps.jetutilslib.utils.*
 
+@Composable
+fun NavGraph(
+    modifier: Modifier,
+    startRoute: String = HOME,
+    controller: NavHostController,
+    graphBuilder: NavGraphBuilder.() -> Unit
+) {
+    NavHost(
+        modifier = modifier,
+        builder = graphBuilder,
+        navController = controller,
+        startDestination = startRoute
+    )
+}
+
+@Composable
+fun rememberNavController(onChanged: (value: String) -> Unit): NavHostController {
+    val controller = rememberNavController()
+    controller.addOnDestinationChangedListener { _, destination, _ ->
+        onChanged.invoke(destination.route.toString())
+    }
+    return controller
+}
 
 fun onExitScaleOut(): ExitTransition {
     return scaleOut(animationSpec = tween())

@@ -16,30 +16,6 @@ import com.easyapps.jetutilslib.R
 import com.easyapps.jetutilslib.utils.*
 
 @Composable
-fun NavGraph(
-    modifier: Modifier,
-    startRoute: String = HOME,
-    controller: NavHostController,
-    graphBuilder: NavGraphBuilder.() -> Unit
-) {
-    NavHost(
-        modifier = modifier,
-        builder = graphBuilder,
-        navController = controller,
-        startDestination = startRoute
-    )
-}
-
-@Composable
-fun rememberNavController(onChanged: (value: String) -> Unit): NavHostController {
-    val controller = rememberNavController()
-    controller.addOnDestinationChangedListener { _, destination, _ ->
-        onChanged.invoke(destination.route.toString())
-    }
-    return controller
-}
-
-@Composable
 fun onPlural(@PluralsRes res: Int?, count: Int, vararg formatArgs: Any): String {
     return pluralStringResource(id = res ?: R.string.empty, count = count, formatArgs = formatArgs)
 }
@@ -54,7 +30,35 @@ fun onString(@StringRes id: Int?, vararg formatArgs: Any): String {
     return stringResource(id = id ?: R.string.empty, formatArgs = formatArgs)
 }
 
+@Composable
+fun SlideInVisible(
+    visible: Boolean,
+    modifier: Modifier = Modifier,
+    content: @Composable AnimatedVisibilityScope.() -> Unit
+) {
+    AnimatedVisibility(
+        content = content,
+        visible = visible,
+        modifier = modifier,
+        exit = slideOutVertically(targetOffsetY = { it / 2 }),
+        enter = slideInVertically(initialOffsetY = { it / 2 })
+    )
+}
 
+@Composable
+fun SlideOutVisible(
+    visible: Boolean,
+    modifier: Modifier = Modifier,
+    content: @Composable AnimatedVisibilityScope.() -> Unit
+) {
+    AnimatedVisibility(
+        content = content,
+        visible = visible,
+        modifier = modifier,
+        exit = slideOutHorizontally(),
+        enter = slideInHorizontally()
+    )
+}
 
 @Composable
 fun ScaleVisible(
@@ -85,6 +89,20 @@ fun onAnimateColor(
         animationSpec = tween(durationMillis = duration)
     )
     return state.copy(alpha)
+}
+
+@Composable
+fun <S> AnimatedContent(
+    state: S,
+    modifier: Modifier = Modifier,
+    content: @Composable AnimatedContentScope.(targetState: S) -> Unit
+) {
+    AnimatedContent(
+        label = EMPTY,
+        content = content,
+        modifier = modifier,
+        targetState = state
+    )
 }
 
 @Composable
