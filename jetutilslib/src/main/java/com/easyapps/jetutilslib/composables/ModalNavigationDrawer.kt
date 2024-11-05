@@ -214,7 +214,8 @@ fun DrawerItem(
             label = {
                 Text(
                     text = onString(id = navItem.title),
-                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Normal)
+                    modifier = Modifier.padding(start = 8.dp),
+                    style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Normal)
                 )
             },
             onClick = {
@@ -242,7 +243,7 @@ fun RailItem(
         val scope = rememberCoroutineScope()
         NavigationRailItem(
             icon = {
-                Icon(icon = navItem.icon, iconSize = 24.dp)
+                Icon(icon = navItem.icon, iconSize = 26.dp)
             },
             onClick = {
                 scope.launch { onClick.invoke(this) }

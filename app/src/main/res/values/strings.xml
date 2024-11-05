@@ -6,4 +6,5 @@
     <string name="all_notes">All notes</string>
     <string name="archive">Archive</string>
     <string name="trash">Trash</string>
+    <string name="upgrade_app">Upgrade app</string>
 </resources>

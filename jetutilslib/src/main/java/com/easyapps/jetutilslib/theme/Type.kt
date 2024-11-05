@@ -56,6 +56,24 @@ private fun getCompactTypography(): Typography {
             hyphens = Hyphens.Auto,
             lineBreak = LineBreak.Paragraph
         ),
+        titleSmall = TextStyle(
+            fontSize = 14.sp,
+            lineHeight = 20.sp,
+            letterSpacing = 0.1.sp,
+            fontWeight = FontWeight.Medium,
+            hyphens = Hyphens.Auto,
+            fontFamily = ubuntuFontFamily,
+            lineBreak = LineBreak.Paragraph
+        ),
+        titleMedium = TextStyle(
+            fontSize = 18.sp,
+            lineHeight = 24.sp,
+            fontFamily = ubuntuFontFamily,
+            letterSpacing = 0.15.sp,
+            fontWeight = FontWeight.Medium,
+            hyphens = Hyphens.Auto,
+            lineBreak = LineBreak.Paragraph
+        ),
         titleLarge = TextStyle(
             fontFamily = ubuntuFontFamily,
             fontWeight = FontWeight.Normal,
@@ -87,6 +105,24 @@ private fun getMediumTypography(): Typography {
             fontWeight = FontWeight.Light,
             hyphens = Hyphens.Auto,
             lineBreak = LineBreak.Paragraph
+        ),
+        titleSmall = TextStyle(
+            fontSize = 16.sp,
+            lineHeight = 22.sp,
+            letterSpacing = 0.1.sp,
+            fontFamily = ubuntuFontFamily,
+            fontWeight = FontWeight.Medium,
+            hyphens = Hyphens.Auto,
+            lineBreak = LineBreak.Paragraph
+        ),
+        titleMedium = TextStyle(
+            fontSize = 20.sp,
+            lineHeight = 26.sp,
+            letterSpacing = 0.15.sp,
+            fontWeight = FontWeight.Medium,
+            hyphens = Hyphens.Auto,
+            lineBreak = LineBreak.Paragraph,
+            fontFamily = ubuntuFontFamily,
         ),
         titleLarge = TextStyle(
             fontFamily = ubuntuFontFamily,
@@ -125,6 +161,24 @@ private fun getExtendedTypography(): Typography {
             lineHeight = 16.sp,
             letterSpacing = 0.5.sp,
             fontWeight = FontWeight.Light,
+            hyphens = Hyphens.Auto,
+            lineBreak = LineBreak.Paragraph,
+            fontFamily = ubuntuFontFamily
+        ),
+        titleMedium = TextStyle(
+            fontSize = 24.sp,
+            lineHeight = 30.sp,
+            letterSpacing = 0.15.sp,
+            fontWeight = FontWeight.Medium,
+            hyphens = Hyphens.Auto,
+            lineBreak = LineBreak.Paragraph,
+            fontFamily = ubuntuFontFamily
+        ),
+        titleSmall = TextStyle(
+            fontSize = 18.sp,
+            lineHeight = 24.sp,
+            letterSpacing = 0.1.sp,
+            fontWeight = FontWeight.Medium,
             hyphens = Hyphens.Auto,
             lineBreak = LineBreak.Paragraph,
             fontFamily = ubuntuFontFamily

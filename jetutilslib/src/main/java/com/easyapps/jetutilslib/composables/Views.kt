@@ -112,6 +112,54 @@ fun Icon(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun IconButton(
+    iconSize: Dp = 28.dp,
+    @DrawableRes icon: Int,
+    enabled: Boolean = true,
+    visible: Boolean = true,
+    checked: Boolean? = null,
+    modifier: Modifier = Modifier,
+    @StringRes contentDescription: Int,
+    tint: Color = LocalContentColor.current,
+    onClick: () -> Unit
+) {
+    ScaleVisible(visible = visible, modifier = modifier) {
+        IconButton(
+            content = {
+                TooltipBox(
+                    tooltip = {
+                        PlainTooltip(
+                            content = {
+                                Text(
+                                    style = MaterialTheme.typography.titleSmall,
+                                    text = stringResource(id = contentDescription)
+                                )
+                            },
+                            contentColor = Color.White,
+                            containerColor = MaterialTheme.colorScheme.secondary
+                        )
+                    },
+                    content = {
+                        Icon(
+                            tint = tint,
+                            modifier = Modifier.size(size = iconSize),
+                            contentDescription = onString(id = contentDescription),
+                            painter = rememberDrawable(icon = icon, checked = checked)
+                        )
+                    },
+                    state = rememberTooltipState(),
+                    positionProvider = TooltipDefaults.rememberTooltipPositionProvider()
+                )
+            },
+            onClick = onClick,
+            enabled = enabled,
+            colors = IconButtonDefaults.iconButtonColors(contentColor = tint)
+        )
+    }
+}
+
+/*@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun IconButton(
     @DrawableRes icon: Int,
     iconScale: Float = 1.5f,
     enabled: Boolean = true,
@@ -155,7 +203,7 @@ fun IconButton(
             colors = IconButtonDefaults.iconButtonColors(contentColor = tint)
         )
     }
-}
+}*/
 
 @Composable
 fun AnimatedTitle(
@@ -213,15 +261,14 @@ fun FloatingActionButton(
                 containerColor = containerColor
             )
 
-            else ->
-                FloatingActionButton(
-                    content = {
-                        Icon(icon = icon)
-                    },
-                    onClick = onClick,
-                    contentColor = contentColor,
-                    containerColor = containerColor
-                )
+            else -> FloatingActionButton(
+                content = {
+                    Icon(icon = icon)
+                },
+                onClick = onClick,
+                contentColor = contentColor,
+                containerColor = containerColor
+            )
         }
     }
 }
